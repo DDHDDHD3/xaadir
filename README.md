@@ -2,8 +2,6 @@
 
 <p align="center"><strong>Digital attendance that feels familiar.</strong><br>Xaadir turns paper-based school attendance into a connected workspace for administrators and teachers.</p>
 
-<p align="center"><a href="https://xaadir.vercel.app">Live Demo</a></p>
-
 ## About Xaadir
 
 Xaadir is a digital school attendance and management platform designed around the workflows schools already know. It keeps the classroom register recognizable while giving school teams a clearer, more connected view of people, classes, attendance, and reports.
@@ -37,7 +35,7 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:3000`. The current development environment includes demo accounts for exercising the Admin and Teacher workspaces. Credentials are intentionally not published in this README.
+Open `http://localhost:3000`. Access requires authorized Admin or Teacher login credentials. Demo credentials are intentionally not published in this README.
 
 Useful checks:
 
