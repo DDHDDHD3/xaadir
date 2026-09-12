@@ -30,6 +30,13 @@ The application is currently a frontend prototype. App Router pages are organize
 
 ## Getting started
 
+### Prerequisites
+
+- Node.js 20.9 or newer
+- npm 10 or newer
+
+### Run locally
+
 ```bash
 npm install
 npm run dev
@@ -37,13 +44,47 @@ npm run dev
 
 Open `http://localhost:3000`. Access requires authorized Admin or Teacher login credentials. Demo credentials are intentionally not published in this README.
 
-Useful checks:
+### Available scripts
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the local development server |
+| `npm run build` | Create a production build |
+| `npm run start` | Serve the production build locally |
+| `npm run lint` | Check the project with ESLint |
+| `npm run typecheck` | Run the TypeScript compiler without emitting files |
+
+Run the checks before opening a pull request:
 
 ```bash
 npm run typecheck
 npm run lint
 npm run build
 ```
+
+## Repository layout
+
+```text
+src/app/          App Router pages, grouped by Admin and Teacher roles
+src/components/   Reusable layouts, pages, forms, and UI primitives
+src/lib/          Domain models, permissions, selectors, repository, and reports
+src/data/         Dashboard fixture data
+docs/             Architecture and implementation notes
+```
+
+## Contributing
+
+1. Fork the repository and create a branch for your change.
+2. Install dependencies with `npm install`.
+3. Keep Admin and Teacher permissions separate and preserve the paper-register workflow.
+4. Run `npm run typecheck`, `npm run lint`, and `npm run build`.
+5. Open a pull request with a short summary of the change and the checks you ran.
+
+Please do not include credentials, private URLs, generated reports, `.env` files, or `.vercel` metadata in a contribution.
+
+## [Contributors](https://github.com/uncannystranger/xaadir/graphs/contributors)
+
+- [DDHDDHD3 (ABDULLAHI MUSE ISSE)](https://github.com/DDHDDHD3)
 
 ## Screenshots
 
