@@ -2,6 +2,8 @@
 
 <p align="center"><strong>Digital attendance that feels familiar.</strong><br>Xaadir turns paper-based school attendance into a connected workspace for administrators and teachers.</p>
 
+<p align="center"><a href="https://xaadir.vercel.app">Live Demo</a></p>
+
 ## About Xaadir
 
 Xaadir is a digital school attendance and management platform designed around the workflows schools already know. It keeps the classroom register recognizable while giving school teams a clearer, more connected view of people, classes, attendance, and reports.
