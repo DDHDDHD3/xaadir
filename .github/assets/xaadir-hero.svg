@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">Xaadir — Digital School Attendance, made familiar.</title>
+  <desc id="desc">A restrained forest-green attendance grid with a check mark and the Xaadir wordmark.</desc>
+  <rect width="1200" height="420" rx="24" fill="#f7faf8"/>
+  <path d="M0 350H1200M0 280H1200M0 210H1200M0 140H1200M150 0V420M300 0V420M450 0V420M600 0V420M750 0V420M900 0V420M1050 0V420" stroke="#dce9e1" stroke-width="1" opacity=".7">
+    <animateTransform attributeName="transform" type="translate" from="0 0" to="-150 0" dur="24s" repeatCount="indefinite"/>
+  </path>
+  <g transform="translate(96 88)">
+    <circle cx="38" cy="38" r="38" fill="#176b4d"/>
+    <path d="M19 39l13 13 26-30" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="56" stroke-dashoffset="56">
+      <animate attributeName="stroke-dashoffset" from="56" to="0" dur="1.2s" begin=".4s" fill="freeze" repeatCount="indefinite"/>
+    </path>
+    <text x="96" y="48" fill="#123b2b" font-family="Arial, sans-serif" font-size="42" font-weight="700" letter-spacing="7">XAADIR</text>
+  </g>
+  <text x="96" y="220" fill="#123b2b" font-family="Arial, sans-serif" font-size="46" font-weight="700">Digital School Attendance,</text>
+  <text x="96" y="278" fill="#176b4d" font-family="Arial, sans-serif" font-size="46" font-weight="700">made familiar.</text>
+  <text x="96" y="333" fill="#557267" font-family="Arial, sans-serif" font-size="20">From paper registers to a connected school workspace.</text>
+</svg>
