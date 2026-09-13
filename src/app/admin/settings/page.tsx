@@ -1,2 +1,2 @@
-import { SecondaryPage } from "@/components/admin/SecondaryPage";
-export default function Page() { return <SecondaryPage kind="settings" />; }
+import { AdminSettings } from "@/components/admin/AdminSettings";
+export default function Page() { return <AdminSettings />; }

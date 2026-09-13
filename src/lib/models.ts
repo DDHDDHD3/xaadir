@@ -15,7 +15,15 @@ export interface School {
   slug: string;
   timezone: string;
   academicYear: string;
+  shortName?: string;
+  logo?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  attendanceDays?: Weekday[];
 }
+
+export interface AdminProfile { id: EntityId; schoolId: EntityId; fullName: string; email: string; contactEmail?: string; phone?: string; profileImage?: string; role: "ADMIN"; createdAt: string; updatedAt?: string; }
 
 export interface User {
   id: EntityId;
@@ -25,6 +33,7 @@ export interface User {
   email: string;
   teacherId?: EntityId;
 }
+export interface UserAccount { id: EntityId; schoolId: EntityId; email: string; password: string; role: UserRole; teacherId?: EntityId; status: "ACTIVE" | "INACTIVE"; createdAt: string; }
 
 export interface Teacher {
   id: EntityId;
@@ -36,7 +45,7 @@ export interface Teacher {
   email: string;
   phone: string;
   gender?: "FEMALE" | "MALE" | "OTHER" | "PREFER_NOT_TO_SAY";
-  avatarUrl?: string;
+  profileImage?: string;
   status: EmploymentStatus;
   subjectIds: EntityId[];
   accountEmail: string;
@@ -132,7 +141,9 @@ export interface StudentAttendanceRecord {
 
 export interface XaadirDataState {
   school: School;
+  adminProfile: AdminProfile;
   users: User[];
+  accounts: UserAccount[];
   teachers: Teacher[];
   students: Student[];
   classes: SchoolClass[];
@@ -143,9 +154,13 @@ export interface XaadirDataState {
   attendanceSessions: StudentAttendanceSession[];
   attendanceRecords: StudentAttendanceRecord[];
 }
+export type UpdateAccountInput = Partial<Pick<UserAccount, "password" | "status" | "email">>;
+export type UpdateAdminAccountInput = UpdateAccountInput & { currentPassword?: string };
+export type UpdateAdminProfileInput = Partial<Pick<AdminProfile, "fullName" | "contactEmail" | "phone" | "profileImage">>;
+export type UpdateSchoolInput = Partial<Omit<School, "id" | "slug">>;
 
-export type CreateTeacherInput = Omit<Teacher, "id" | "schoolId" | "name"> & { name?: string };
-export type UpdateTeacherInput = Partial<Omit<Teacher, "id" | "schoolId" | "employeeId">>;
+export type CreateTeacherInput = Omit<Teacher, "id" | "schoolId" | "name"> & { name?: string; password?: string; classIds?: string[]; scheduleDay?: Weekday; startTime?: string; endTime?: string };
+export type UpdateTeacherInput = Partial<Omit<Teacher, "id" | "schoolId" | "employeeId">> & { password?: string };
 export type CreateStudentInput = Omit<Student, "id" | "schoolId" | "name"> & { name?: string };
 export type UpdateStudentInput = Partial<Omit<Student, "id" | "schoolId" | "studentId">>;
 export type CreateClassInput = Omit<SchoolClass, "id" | "schoolId">;

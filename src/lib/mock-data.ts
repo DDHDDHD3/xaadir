@@ -1,10 +1,15 @@
 import type { XaadirDataState } from "./models";
 
 export const xaadirSeedData: XaadirDataState = {
-  school: { id: "school-xaadir", name: "Xaadir Academy", slug: "xaadir-academy", timezone: "Africa/Mogadishu", academicYear: "2026–2027" },
+  school: { id: "school-xaadir", name: "Xaadir Academy", slug: "xaadir-academy", timezone: "Africa/Mogadishu", academicYear: "2026–2027", shortName: "Xaadir", attendanceDays: ["SATURDAY", "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY"] },
+  adminProfile: { id: "admin-profile", schoolId: "school-xaadir", fullName: "Xaadir School Admin", email: "admin.xaadir.demo@gmail.com", contactEmail: "admin.xaadir.demo@gmail.com", role: "ADMIN", createdAt: "2026-01-01" },
   users: [
-    { id: "user-admin", schoolId: "school-xaadir", role: "ADMIN", name: "Totok Michael", email: "tmichael20@mail.com" },
+    { id: "user-admin", schoolId: "school-xaadir", role: "ADMIN", name: "Xaadir School Admin", email: "admin.xaadir.demo@gmail.com" },
     { id: "user-teacher-ahmed", schoolId: "school-xaadir", role: "TEACHER", name: "Ahmed Hassan", email: "ahmed@xaadir.school", teacherId: "teacher-ahmed" },
+  ],
+  accounts: [
+    { id: "account-admin", schoolId: "school-xaadir", email: "admin.xaadir.demo@gmail.com", password: "XaadirAdmin#2026", role: "ADMIN", status: "ACTIVE", createdAt: "2026-01-01" },
+    { id: "account-ahmed", schoolId: "school-xaadir", email: "teacher.xaadir.demo@gmail.com", password: "XaadirTeacher#2026", role: "TEACHER", teacherId: "teacher-ahmed", status: "ACTIVE", createdAt: "2026-01-01" },
   ],
   subjects: [
     { id: "subject-math", schoolId: "school-xaadir", name: "Mathematics", code: "MATH" },

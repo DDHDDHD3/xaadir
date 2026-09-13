@@ -1,2 +1,2 @@
-import { SecondaryPage } from "@/components/admin/SecondaryPage";
-export default function Page() { return <SecondaryPage kind="analytics" />; }
+import { AnalyticsWorkspace } from "@/components/admin/AnalyticsWorkspace";
+export default function Page() { return <AnalyticsWorkspace />; }

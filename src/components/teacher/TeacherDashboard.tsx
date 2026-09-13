@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, Check, Clock3, MapPin, Users } from "lucide-react";
+import { InitialAvatar } from "@/components/admin/AdminUI";
 import type { ScheduleSession, TeacherCheckIn, TeacherWorkSession } from "@/lib/models";
 import type { TeacherViewModel } from "./types";
 import styles from "./teacher.module.css";
@@ -42,7 +43,7 @@ export function TeacherDashboard({
 
   return (
     <div className={styles.pageStack}>
-      <header className={styles.pageHeader}>
+      <header className={styles.pageHeader}><InitialAvatar name={model.teacher.fullName} image={model.teacher.profileImage} large />
         <div>
           <span className={styles.eyebrow}>Teacher workspace</span>
           <h1>Good morning, {firstName(model.teacher.fullName)}</h1>

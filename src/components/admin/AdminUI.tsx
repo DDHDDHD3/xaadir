@@ -8,7 +8,10 @@ import {
   Search,
   X,
 } from "lucide-react";
+import Image from "next/image";
+import { createPortal } from "react-dom";
 import type { FormEvent, ReactNode } from "react";
+import { useDialog } from "@/components/layout/useDialog";
 import styles from "./admin.module.css";
 
 export { styles };
@@ -86,40 +89,43 @@ export function StatusPill({ children, tone }: { children: ReactNode; tone?: "po
   return <span className={`${styles.statusPill} ${styles[`tone${(tone ?? "neutral").replace(/^./, (value) => value.toUpperCase())}`]}`}>{children}</span>;
 }
 
-export function InitialAvatar({ name, large = false }: { name: string; large?: boolean }) {
-  const initials = name.split(" ").filter(Boolean).slice(0, 2).map((part) => part[0]).join("");
+export function getInitials(name: string) { return name.split(" ").filter(Boolean).slice(0, 2).map((part) => part[0]?.toUpperCase()).join(""); }
+export function InitialAvatar({ name, large = false, image }: { name: string; large?: boolean; image?: string }) {
+  const initials = getInitials(name);
   let hue = 134;
   for (const character of name) hue = (hue + character.charCodeAt(0) * 7) % 360;
-  return <span className={`${styles.avatar} ${large ? styles.avatarLarge : ""}`} style={{ "--avatarHue": hue } as React.CSSProperties}>{initials}</span>;
+  return image ? <Image unoptimized width={large ? 64 : 38} height={large ? 64 : 38} className={`${styles.avatar} ${large ? styles.avatarLarge : ""}`} src={image} alt={`${name} profile`} /> : <span className={`${styles.avatar} ${large ? styles.avatarLarge : ""}`} style={{ "--avatarHue": hue } as React.CSSProperties}>{initials}</span>;
 }
 
 export function EmptyState({ title, detail, action }: { title: string; detail: string; action?: ReactNode }) {
   return <div className={styles.emptyState}><span><Search /></span><h3>{title}</h3><p>{detail}</p>{action}</div>;
 }
 
-export function Drawer({ open, title, subtitle, children, onClose, footer }: { open: boolean; title: string; subtitle?: string; children: ReactNode; onClose: () => void; footer?: ReactNode }) {
+export function Drawer({ open, title, subtitle, children, onClose, footer, centered = false, steps }: { centered?: boolean; steps?: ReactNode; open: boolean; title: string; subtitle?: string; children: ReactNode; onClose: () => void; footer?: ReactNode }) {
+  const dialog = useDialog(open, onClose);
   if (!open) return null;
-  return (
-    <div className={styles.overlay} role="presentation" onMouseDown={(event) => { if (event.currentTarget === event.target) onClose(); }}>
-      <section className={styles.drawer} role="dialog" aria-modal="true" aria-label={title}>
-        <header><div><h2>{title}</h2>{subtitle && <p>{subtitle}</p>}</div><button type="button" onClick={onClose} aria-label="Close"><X /></button></header>
+  return createPortal(
+    <div className={`${styles.overlay} ${centered ? styles.teacherOverlay : ""}`} role="presentation" onMouseDown={(event) => { if (event.currentTarget === event.target) onClose(); }}>
+      <section ref={dialog} tabIndex={-1} className={styles.drawer} role="dialog" aria-modal="true" aria-label={title}>
+        <header><div><h2>{title}</h2>{subtitle && <p>{subtitle}</p>}{steps}</div><button type="button" onClick={onClose} aria-label="Close"><X /></button></header>
         <div className={styles.drawerBody}>{children}</div>
         {footer && <footer>{footer}</footer>}
       </section>
-    </div>
+    </div>, document.body
   );
 }
 
 export function ConfirmDialog({ open, title, detail, confirmLabel = "Remove", onCancel, onConfirm }: { open: boolean; title: string; detail: string; confirmLabel?: string; onCancel: () => void; onConfirm: () => void }) {
+  const dialog = useDialog(open, onCancel);
   if (!open) return null;
-  return (
+  return createPortal(
     <div className={`${styles.overlay} ${styles.centeredOverlay}`} role="presentation">
-      <section className={styles.confirmDialog} role="alertdialog" aria-modal="true" aria-label={title}>
+      <section ref={dialog} tabIndex={-1} className={styles.confirmDialog} role="alertdialog" aria-modal="true" aria-label={title}>
         <span className={styles.dangerIcon}><AlertCircle /></span>
         <h2>{title}</h2><p>{detail}</p>
         <div><SecondaryButton onClick={onCancel}>Cancel</SecondaryButton><button type="button" className={styles.dangerButton} onClick={onConfirm}>{confirmLabel}</button></div>
       </section>
-    </div>
+    </div>, document.body
   );
 }
 
@@ -132,7 +138,7 @@ export function FormSection({ title, detail, children }: { title: string; detail
 }
 
 export function OperationNotice({ state }: { state?: { ok: boolean; message: string } | null }) {
-  if (!state) return null;
+  if (!state?.message.trim()) return null;
   return <div className={`${styles.notice} ${state.ok ? styles.noticeSuccess : styles.noticeError}`}>{state.ok ? <CheckCircle2 /> : <AlertCircle />}{state.message}</div>;
 }
 
